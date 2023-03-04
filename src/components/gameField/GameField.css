@@ -1,0 +1,9 @@
+.game-field__list {
+  display: grid;
+  grid-template-columns: repeat(16, 22px);
+  padding: 0;
+  border: 2px white solid;
+  border-left-color: #808080;
+  border-top-color: #808080;
+  margin: 10px 0;
+}

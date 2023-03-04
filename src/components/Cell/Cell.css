@@ -1,0 +1,22 @@
+.cell {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.cell__button {
+  width: 22px;
+  height: 22px;
+  background-color: #c0c0c0;
+  cursor: pointer;
+  border: 2px white solid;
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+}
+
+.cell__button:active {
+  cursor: pointer;
+  border: 2px #c0c0c0 solid;
+  border-left-color: #808080;
+  border-top-color: #808080;
+}
