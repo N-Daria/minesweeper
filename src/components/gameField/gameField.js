@@ -2,7 +2,7 @@ import React from 'react';
 import Cell from '../Cell/Cell';
 import './GameField.css';
 
-export default React.memo(({ gameField }) => {
+export default React.memo(({ gameField, startGame, onMouseDown, onMouseUp }) => {
   // this.hasBomb = false;
   // this.checked = false;
   // this.opened = false;
@@ -43,8 +43,16 @@ export default React.memo(({ gameField }) => {
     <ul className="game-field__list">
       {gameField.map((row, i) => {
         return row.map((cell, j) => {
-          // eslint-disable-next-line react/no-array-index-key
-          return <Cell cell={cell} key={`${i}-${j}`} />;
+          return (
+            <Cell
+              cell={cell}
+              // eslint-disable-next-line react/no-array-index-key
+              key={`${i}-${j}`}
+              startGame={startGame}
+              onMouseDown={onMouseDown}
+              onMouseUp={onMouseUp}
+            />
+          );
         });
       })}
     </ul>

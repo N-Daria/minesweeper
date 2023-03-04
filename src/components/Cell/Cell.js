@@ -1,7 +1,8 @@
+/* eslint-disable no-debugger */
 import './Cell.css';
 import React from 'react';
 
-export default React.memo(({ startGame }) => {
+export default React.memo(({ startGame, onMouseDown, onMouseUp }) => {
   const handleClick = (event) => {
     console.log(event);
     startGame();
@@ -27,6 +28,8 @@ export default React.memo(({ startGame }) => {
         aria-label="chose the cell"
         onClick={handleClick}
         onContextMenu={markCell}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
       />
     </li>
   );
