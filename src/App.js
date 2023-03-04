@@ -3,24 +3,77 @@ import React from 'react';
 import './App.css';
 import { getInitialGameField, bombsNumber } from './components/InitialGameField/InitialGameField';
 import GameField from './components/GameField/GameField';
+import Timer from './components/Timer/Timer';
 
 function App() {
   const [gameField, setGameField] = React.useState([]);
-
+  const [allCells, setAllCells] = React.useState([]);
   const [button, setButton] = React.useState('🙂');
   const [newGame, setNewGame] = React.useState(false);
-  const [timer, setTimer] = React.useState('00');
+  // const [timer, setTimer] = React.useState('00');
+  // const [timerId, setTimerId] = React.useState('');
+
+  // const tick = () => {
+  //   let oldsec = +timer;
+  //   setTimer((oldsec += 1));
+  // };
+
+  // const start = () => {};
+
+  // const stop = () => {
+  //   clearInterval(timerId);
+  // };
+
+  // const startGame = () => {
+  //   start();
+  // };
+
+  // const startTimer = () => {
+  //   debugger;
+  //   const timerId = setInterval(() => {
+  //     debugger;
+  //     setTimer(+timer + 1);
+  //   }, 1000);
+
+  //   return timerId;
+  // };
+
+  // const ff = () => {
+  //   const timerId = setInterval(() => {
+  //     setSeconds(timer + 1);
+  //   }, 1000);
+  // };
+
+  const removeTimer = () => {
+    allCells.forEach((el) => {
+      el.removeEventListener('click', removeTimer);
+    });
+  };
 
   React.useEffect(() => {
-    debugger;
     setGameField(getInitialGameField());
+    setAllCells(Array.from(document.querySelectorAll('.cell')));
   }, [newGame]);
+
+  React.useEffect(() => {
+    setAllCells(Array.from(document.querySelectorAll('.cell')));
+  }, [gameField]);
+
+  React.useEffect(() => {
+    allCells.forEach((el) => {
+      el.addEventListener('click', removeTimer);
+    });
+  }, [allCells]);
 
   // &#128526; - очки
   // &#128565; - проигрыш
 
+  // const stop = () => {
+  //   clearInterval(startTimer());
+  // };
+
   const startGame = () => {
-    console.log(1);
+    console.log('start game function');
   };
 
   const resetGame = () => {
@@ -48,7 +101,7 @@ function App() {
           >
             {button}
           </button>
-          <p className="game__timer">{timer}</p>
+          <Timer />
         </article>
 
         <GameField
