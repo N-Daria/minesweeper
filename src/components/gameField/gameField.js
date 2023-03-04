@@ -1,37 +1,52 @@
-import { configuration } from '../../utils/utils';
+import React from 'react';
+import Cell from '../Cell/Cell';
+import './GameField.css';
 
-class InitialGameField {
-  constructor(config) {
-    this.rows = config.field.row;
-    this.columns = config.field.columns;
-    this.gameField = [];
-    this.bombsNumber = Math.floor(
-      Math.random() * (config.bombs.max + 1 - config.bombs.min) + config.bombs.min,
-    );
-  }
+export default React.memo(({ gameField }) => {
+  // this.hasBomb = false;
+  // this.checked = false;
+  // this.opened = false;
 
-  createGameField = () => {
-    for (let i = 0; i < this.rows; i++) {
-      const innerArr = [];
-      for (let j = 0; j < this.columns; j++) {
-        innerArr.push('');
-      }
-      this.gameField.push(innerArr);
-    }
+  // constructor(config) {
+  //   this.rows = config.field.row;
+  //   this.columns = config.field.columns;
+  //   this.gameField = [];
+  //   this.bombsNumber = Math.floor(
+  //     Math.random() * (config.bombs.max + 1 - config.bombs.min) + config.bombs.min,
+  //   );
+  // }
 
-    this._createBombsArr();
-  };
+  // const createGameField = () => {
 
-  _createBombsArr = () => {
-    for (let i = 0; i <= this.bombsNumber; i++) {
-      const x = Math.floor(Math.random() * this.rows);
-      const y = Math.floor(Math.random() * this.columns);
+  // };
 
-      if (!this.gameField[x][y]) {
-        this.gameField[x][y] = '*';
-      }
-    }
-  };
-}
+  // {
+  //   this.state.field.map(function(row){
+  //     return row.map(function (cell) {
+  //       return (
+  //         <Cell
+  //         row={cell.row}
+  //           col={cell.col}
+  //           hasBomb={cell.hasBomb}
+  //           bombNbr={cell.bombNbr}
+  //           key={cell.row + "-" + cell.col}
+  //           checked={cell.checked}
+  //           opened={cell.opened}
+  //           clickLeft={this.cellLeftClicked}
+  //           clickRight={this.cellRightClicked}
+  //         />
+  //       )
+  //     }, this);
+  //   }, this)
 
-export default new InitialGameField(configuration);
+  return (
+    <ul className="game-field__list">
+      {gameField.map((row, i) => {
+        return row.map((cell, j) => {
+          // eslint-disable-next-line react/no-array-index-key
+          return <Cell cell={cell} key={`${i}-${j}`} />;
+        });
+      })}
+    </ul>
+  );
+});

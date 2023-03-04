@@ -1,13 +1,29 @@
+import React from 'react';
 import './App.css';
-import InitialGameField from './components/gameField/gameField';
+import getInitialGameField from './components/InitialGameField/InitialGameField';
+import GameField from './components/GameField/GameField';
 
 function App() {
-  InitialGameField.createGameField();
+  const [gameField, setGameField] = React.useState([]);
+
+  React.useEffect(() => {
+    setGameField(getInitialGameField());
+  }, []);
 
   return (
-    <div className="App">
-      <h1>Hello React!</h1>
-    </div>
+    <main className="body">
+      <section className="game">
+        <article className="game__info">
+          <p className="game__timer" />
+          <button className="game__button" aria-label="reset the field" type="button">
+            &#128578;
+          </button>
+          <p className="game__bombsNumber" />
+        </article>
+
+        <GameField gameField={gameField} />
+      </section>
+    </main>
   );
 }
 
