@@ -45,36 +45,17 @@ function App() {
     const iList = [i - 1, i, i + 1];
     const jList = [j - 1, j, j + 1];
 
-    // eslint-disable-next-line no-restricted-syntax, prefer-const
-    for (let x of iList) {
-      // eslint-disable-next-line no-restricted-syntax, prefer-const
-      for (let y of jList) {
+    iList.forEach((x) => {
+      jList.forEach((y) => {
         setTimeout(() => {
-          // if (gameField[x][y]) {
           if (document.getElementById(`${x}_${y}`)) {
             document.getElementById(`${x}_${y}`).click();
-            // gameField[x][y].click();
           }
         }, 0);
-      }
-    }
-
-    // iList.forEach((x) => {
-    //   if (gameField[x]) {
-    //     jList.forEach((y) => {
-    //       setTimeout(() => {
-    //         // if (gameField[x][y]) {
-    //         if (document.getElementById(`${x}_${y}`)) {
-    //           document.getElementById(`${x}_${y}`);
-    //           // gameField[x][y].click();
-    //         }
-    //       }, 0);
-    //     });
-    //   }
-    // });
+      });
+    });
   };
 
-  // eslint-disable-next-line no-unused-vars
   const cellClick = (cell, index, value) => {
     const openCells = cellsClicked + 1;
     setCellsClicked(openCells);
@@ -102,14 +83,6 @@ function App() {
     setButton('🙂');
   };
 
-  const onMouseDown = () => {
-    setButton('😮');
-  };
-
-  const onMouseUp = () => {
-    setButton('🙂');
-  };
-
   return (
     <main className="body">
       <section className="game">
@@ -130,8 +103,12 @@ function App() {
         <GameField
           gameField={gameField}
           cellClick={cellClick}
-          onMouseDown={onMouseDown}
-          onMouseUp={onMouseUp}
+          onMouseDown={() => {
+            setButton('😮');
+          }}
+          onMouseUp={() => {
+            setButton('🙂');
+          }}
         />
       </section>
     </main>
