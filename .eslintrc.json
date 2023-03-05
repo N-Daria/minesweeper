@@ -21,6 +21,12 @@
   "plugins": ["react"],
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
+    "no-underscore-dangle": ["error", { "enforceInClassFields": false, "allowAfterThis": true }],
+    "react/prop-types": "off",
+    "arrow-body-style": ["error", "always"],
+    "no-param-reassign": ["error", { "props": false }],
+    "object-curly-newline": "off"
   }
 }
