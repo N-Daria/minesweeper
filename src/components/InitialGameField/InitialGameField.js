@@ -1,8 +1,10 @@
 import { configuration } from '../../utils/utils';
 
-const bombsNumber = Math.floor(
-  Math.random() * (configuration.bombs.max + 1 - configuration.bombs.min) + configuration.bombs.min,
-);
+const bombsNumberRange = {
+  max: configuration.bombs.max,
+  min: configuration.bombs.min,
+};
+let bombsNumber = 0;
 const { rows } = configuration.field;
 const { columns } = configuration.field;
 
@@ -47,8 +49,11 @@ const createGameField = () => {
 };
 
 const getInitialGameField = () => {
+  bombsNumber = Math.floor(
+    Math.random() * (bombsNumberRange.max + 1 - bombsNumberRange.min) + bombsNumberRange.min,
+  );
   const gameField = createGameField();
-  return gameField;
+  return { gameField, bombsNumber };
 };
 
 export default getInitialGameField;
