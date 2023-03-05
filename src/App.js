@@ -10,41 +10,12 @@ function App() {
   const [allCells, setAllCells] = React.useState([]);
   const [button, setButton] = React.useState('🙂');
   const [newGame, setNewGame] = React.useState(false);
-  // const [timer, setTimer] = React.useState('00');
-  // const [timerId, setTimerId] = React.useState('');
-
-  // const tick = () => {
-  //   let oldsec = +timer;
-  //   setTimer((oldsec += 1));
-  // };
-
-  // const start = () => {};
-
-  // const stop = () => {
-  //   clearInterval(timerId);
-  // };
-
-  // const startGame = () => {
-  //   start();
-  // };
-
-  // const startTimer = () => {
-  //   debugger;
-  //   const timerId = setInterval(() => {
-  //     debugger;
-  //     setTimer(+timer + 1);
-  //   }, 1000);
-
-  //   return timerId;
-  // };
-
-  // const ff = () => {
-  //   const timerId = setInterval(() => {
-  //     setSeconds(timer + 1);
-  //   }, 1000);
-  // };
+  const [isTimer, setIsTimer] = React.useState(false);
 
   const removeTimer = () => {
+    setIsTimer(true);
+    setNewGame(true);
+
     allCells.forEach((el) => {
       el.removeEventListener('click', removeTimer);
     });
@@ -52,7 +23,6 @@ function App() {
 
   React.useEffect(() => {
     setGameField(getInitialGameField());
-    setAllCells(Array.from(document.querySelectorAll('.cell')));
   }, [newGame]);
 
   React.useEffect(() => {
@@ -68,16 +38,13 @@ function App() {
   // &#128526; - очки
   // &#128565; - проигрыш
 
-  // const stop = () => {
-  //   clearInterval(startTimer());
-  // };
-
   const startGame = () => {
     console.log('start game function');
   };
 
   const resetGame = () => {
-    return newGame ? setNewGame(false) : setNewGame(true);
+    setNewGame(false);
+    setIsTimer(false);
   };
 
   const onMouseDown = () => {
@@ -101,7 +68,8 @@ function App() {
           >
             {button}
           </button>
-          <Timer />
+
+          {isTimer ? <Timer /> : <p className="game__timer">0000</p>}
         </article>
 
         <GameField

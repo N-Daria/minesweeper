@@ -18,8 +18,7 @@
   border-left-color: #808080;
   border-top-color: #808080;
   display: flex;
-  justify-content: center;
-  padding: 4px;
+  padding: 4px 10px;
   align-items: center;
 }
 
@@ -27,11 +26,13 @@
   border: 2px white solid;
   border-right-color: #808080;
   border-bottom-color: #808080;
-
+  margin: 0 auto;
   width: 32px;
   height: 32px;
   padding: 0;
   cursor: pointer;
+  line-height: 26px;
+  font-size: 20px;
 }
 
 .game__button:active {
@@ -40,4 +41,15 @@
   border: 2px #c0c0c0 solid;
   border-left-color: #808080;
   border-top-color: #808080;
+}
+
+.game__timer,
+.game__bombsNumber {
+  display: inline-block;
+  background-color: black;
+  color: red;
+  line-height: 26px;
+  font-size: 26px;
+  margin: 0;
+  font-family: 'digital-7', sans-serif;
 }
