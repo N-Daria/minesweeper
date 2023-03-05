@@ -12,6 +12,7 @@
   border: 2px white solid;
   border-right-color: #808080;
   border-bottom-color: #808080;
+  padding: 0;
 }
 
 .cell__button:active {
@@ -19,4 +20,14 @@
   border: 2px #c0c0c0 solid;
   border-left-color: #808080;
   border-top-color: #808080;
+}
+
+.cell__button_opened {
+  border: 1px #808080 solid;
+  cursor: default;
+}
+
+.cell__button_opened:active {
+  cursor: default;
+  border: 1px #808080 solid;
 }
