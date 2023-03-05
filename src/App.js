@@ -1,7 +1,7 @@
 /* eslint-disable no-debugger */
 import React from 'react';
 import './App.css';
-import { getInitialGameField, bombsNumber } from './components/InitialGameField/InitialGameField';
+import getInitialGameField from './components/InitialGameField/InitialGameField';
 import GameField from './components/GameField/GameField';
 import Timer from './components/Timer/Timer';
 
@@ -11,10 +11,14 @@ function App() {
   const [button, setButton] = React.useState('🙂');
   const [newGame, setNewGame] = React.useState(false);
   const [isTimer, setIsTimer] = React.useState(false);
+  const [bombsNumber, setBombsNumber] = React.useState(0);
+  const [safeCells, setSafeCells] = React.useState(0);
+  const [cellsClicked, setCellsClicked] = React.useState(0);
 
   const removeTimer = () => {
     setIsTimer(true);
     setNewGame(true);
+    setSafeCells(allCells.length - bombsNumber);
 
     allCells.forEach((el) => {
       el.removeEventListener('click', removeTimer);
@@ -22,7 +26,8 @@ function App() {
   };
 
   React.useEffect(() => {
-    setGameField(getInitialGameField());
+    setGameField(getInitialGameField().gameField);
+    setBombsNumber(getInitialGameField().bombsNumber);
   }, [newGame]);
 
   React.useEffect(() => {
@@ -35,16 +40,66 @@ function App() {
     });
   }, [allCells]);
 
-  // &#128526; - очки
-  // &#128565; - проигрыш
+  const recursionClick = (cell, i, j) => {
+    cell.id = `${i}_${j}`;
+    const iList = [i - 1, i, i + 1];
+    const jList = [j - 1, j, j + 1];
 
-  const startGame = () => {
-    console.log('start game function');
+    // eslint-disable-next-line no-restricted-syntax, prefer-const
+    for (let x of iList) {
+      // eslint-disable-next-line no-restricted-syntax, prefer-const
+      for (let y of jList) {
+        setTimeout(() => {
+          // if (gameField[x][y]) {
+          if (document.getElementById(`${x}_${y}`)) {
+            document.getElementById(`${x}_${y}`).click();
+            // gameField[x][y].click();
+          }
+        }, 0);
+      }
+    }
+
+    // iList.forEach((x) => {
+    //   if (gameField[x]) {
+    //     jList.forEach((y) => {
+    //       setTimeout(() => {
+    //         // if (gameField[x][y]) {
+    //         if (document.getElementById(`${x}_${y}`)) {
+    //           document.getElementById(`${x}_${y}`);
+    //           // gameField[x][y].click();
+    //         }
+    //       }, 0);
+    //     });
+    //   }
+    // });
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  const cellClick = (cell, index, value) => {
+    const openCells = cellsClicked + 1;
+    setCellsClicked(openCells);
+
+    const winCheck = () => {
+      if (openCells >= safeCells) {
+        setButton('😎');
+        console.log('win');
+      }
+    };
+
+    winCheck();
+    if (value === '' && cell.id === `${index.i}_${index.j}`) {
+      recursionClick(cell, index.i, index.j);
+      winCheck();
+    } else if (value === '*') {
+      setButton('😵');
+      console.log('lose');
+    }
   };
 
   const resetGame = () => {
     setNewGame(false);
     setIsTimer(false);
+    setButton('🙂');
   };
 
   const onMouseDown = () => {
@@ -74,7 +129,7 @@ function App() {
 
         <GameField
           gameField={gameField}
-          startGame={startGame}
+          cellClick={cellClick}
           onMouseDown={onMouseDown}
           onMouseUp={onMouseUp}
         />
