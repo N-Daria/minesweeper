@@ -1,6 +1,9 @@
+.game-field__table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
 .game-field__list {
-  display: grid;
-  grid-template-columns: repeat(16, 22px);
   padding: 0;
   border: 2px white solid;
   border-left-color: #808080;
