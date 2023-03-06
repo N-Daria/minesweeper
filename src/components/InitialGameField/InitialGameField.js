@@ -23,10 +23,15 @@ const createAdjacentCell = (x, y, gameField) => {
   });
 };
 
-const createBombsArr = (gameField) => {
+export const createBombsArr = (gameField, cell) => {
   for (let i = 0; i <= bombsNumber; i++) {
     const x = Math.floor(Math.random() * rows);
     const y = Math.floor(Math.random() * columns);
+
+    if (gameField[x][y] === cell) {
+      i -= 1;
+      return i;
+    }
 
     if (!gameField[x][y]) {
       gameField[x][y] = '*';
@@ -45,15 +50,13 @@ const createGameField = () => {
     }
     gameField.push(innerArr);
   }
-  return createBombsArr(gameField);
+  return gameField;
 };
 
-const getInitialGameField = () => {
+export const getInitialGameField = () => {
   bombsNumber = Math.floor(
     Math.random() * (bombsNumberRange.max + 1 - bombsNumberRange.min) + bombsNumberRange.min,
   );
   const gameField = createGameField();
   return { gameField, bombsNumber };
 };
-
-export default getInitialGameField;

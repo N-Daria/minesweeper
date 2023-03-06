@@ -19,6 +19,7 @@ export default React.memo(
 
     if (isGameOver && value === '*') {
       element.textContent = value;
+      element.classList.add('cell__button_opened');
     }
 
     const handleClick = ({ target }) => {

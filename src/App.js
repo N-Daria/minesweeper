@@ -1,7 +1,9 @@
-/* eslint-disable no-debugger */
 import React from 'react';
 import './App.css';
-import getInitialGameField from './components/InitialGameField/InitialGameField';
+import {
+  getInitialGameField,
+  createBombsArr,
+} from './components/InitialGameField/InitialGameField';
 import Timer from './components/Timer/Timer';
 import GameField from './components/GameField/GameField';
 
@@ -16,10 +18,11 @@ function App() {
   const [cellsClicked, setCellsClicked] = React.useState(0);
   const [isGameOver, setIsGameOver] = React.useState(false);
 
-  const startGame = () => {
+  const startGame = (event) => {
     setIsTimer(true);
     setNewGame(true);
     setSafeCells(allCells.length - bombsNumber);
+    createBombsArr(gameField, event);
 
     allCells.forEach((el) => {
       el.removeEventListener('click', startGame);
