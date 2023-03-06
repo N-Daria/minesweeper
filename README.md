@@ -23,9 +23,9 @@
 
 ## Инструкцию по развертыванию проекта
 
-git clone https://github.com/N-Daria/minesweeper.git
+git clone https://github.com/N-Daria/minesweeper.git  
 npm i  
-npm run start
+npm run start  
 
 ## Планы по доработке проекта
 
