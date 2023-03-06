@@ -6,11 +6,17 @@ export default React.memo(
     const [isBlocked, setIsBlocked] = React.useState(false);
     const element = document.getElementById(id);
 
+    const addStyle = (el, style) => {
+      el.classList.add(`${style}`);
+    };
+
     const resetCellsStyles = () => {
       element.textContent = '';
       element.disabled = false;
-      element.classList.remove('cell__button_failed');
-      element.classList.remove('cell__button_opened');
+      Array.from(element.classList).forEach((el) => {
+        return element.classList.remove(el);
+      });
+      addStyle(element, 'cell__button');
     };
 
     if (!newGame && element) {
@@ -19,18 +25,21 @@ export default React.memo(
 
     if (isGameOver && value === '*') {
       element.textContent = value;
-      element.classList.add('cell__button_opened');
+      addStyle(element, 'cell__button_opened');
+      addStyle(element, 'cell__button_bomb');
     }
 
     const handleClick = ({ target }) => {
       if (!isBlocked) {
         const isFailed = cellClick(target, index, value);
         target.textContent = value;
-        target.classList.add('cell__button_opened');
+        addStyle(target, 'cell__button_opened');
         target.disabled = true;
+        addStyle(target, `cell__button_${target.textContent}`);
 
         if (isFailed) {
-          target.classList.add('cell__button_failed');
+          addStyle(target, 'cell__button_failed');
+          addStyle(target, 'cell__button_bomb');
         }
       }
     };

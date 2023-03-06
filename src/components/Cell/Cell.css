@@ -13,6 +13,10 @@
   border-right-color: #808080;
   border-bottom-color: #808080;
   padding: 0;
+  font-family: sans-serif;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 18px;
 }
 
 .cell__button:active {
@@ -33,11 +37,46 @@
 }
 
 .cell__button:disabled {
-  color: inherit;
+  opacity: 1;
 }
 
 .cell__button_failed {
   border: 1px #808080 solid;
   cursor: default;
   background-color: red;
+}
+
+.cell__button_bomb {
+  background-image: url(../../images/mine.png);
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position: center;
+}
+
+.cell__button_1 {
+  color: #0000ff;
+}
+
+.cell__button_2 {
+  color: #008000;
+}
+
+.cell__button_3 {
+  color: #ff0000;
+}
+
+.cell__button_4 {
+  color: #000080;
+}
+
+.cell__button_5 {
+  color: #800000;
+}
+
+.cell__button_6 {
+  color: #008080;
+}
+
+.cell__button_8 {
+  color: #808080;
 }
