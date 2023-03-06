@@ -2,7 +2,7 @@ import React from 'react';
 import Cell from '../Cell/Cell';
 import './GameField.css';
 
-export default React.memo(({ gameField, cellClick, onMouseDown, onMouseUp }) => {
+export default React.memo(({ gameField, cellClick, onMouseDown, onMouseUp, isGameOver }) => {
   return (
     <table>
       <tbody className="game-field__list">
@@ -21,6 +21,7 @@ export default React.memo(({ gameField, cellClick, onMouseDown, onMouseUp }) => 
                     onMouseDown={onMouseDown}
                     onMouseUp={onMouseUp}
                     id={`${i}_${j}`}
+                    isGameOver={isGameOver}
                   />
                 );
               })}

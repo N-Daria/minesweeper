@@ -14,6 +14,7 @@ function App() {
   const [bombsNumber, setBombsNumber] = React.useState(0);
   const [safeCells, setSafeCells] = React.useState(0);
   const [cellsClicked, setCellsClicked] = React.useState(0);
+  const [isGameOver, setIsGameOver] = React.useState(false);
 
   const removeTimer = () => {
     setIsTimer(true);
@@ -56,31 +57,36 @@ function App() {
     });
   };
 
+  const winCheck = (openCells) => {
+    if (openCells >= safeCells) {
+      setButton('😎');
+      setIsGameOver(true);
+    }
+  };
+
   const cellClick = (cell, index, value) => {
     const openCells = cellsClicked + 1;
     setCellsClicked(openCells);
 
-    const winCheck = () => {
-      if (openCells >= safeCells) {
-        setButton('😎');
-        console.log('win');
-      }
-    };
-
-    winCheck();
+    winCheck(openCells);
     if (value === '' && cell.id === `${index.i}_${index.j}`) {
       recursionClick(cell, index.i, index.j);
-      winCheck();
+      winCheck(openCells);
     } else if (value === '*') {
       setButton('😵');
-      console.log('lose');
+      setIsGameOver(true);
+      setIsTimer(false);
+      return true;
     }
+
+    return false;
   };
 
   const resetGame = () => {
     setNewGame(false);
     setIsTimer(false);
     setButton('🙂');
+    setIsGameOver(false);
   };
 
   return (
@@ -109,6 +115,7 @@ function App() {
           onMouseUp={() => {
             setButton('🙂');
           }}
+          isGameOver={isGameOver}
         />
       </section>
     </main>

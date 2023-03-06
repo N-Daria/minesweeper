@@ -31,3 +31,13 @@
   cursor: default;
   border: 1px #808080 solid;
 }
+
+.cell__button:disabled {
+  color: inherit;
+}
+
+.cell__button_failed {
+  border: 1px #808080 solid;
+  cursor: default;
+  background-color: red;
+}
