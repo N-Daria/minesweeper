@@ -2,27 +2,27 @@
 import React from 'react';
 import './App.css';
 import getInitialGameField from './components/InitialGameField/InitialGameField';
-import GameField from './components/GameField/GameField';
 import Timer from './components/Timer/Timer';
+import GameField from './components/GameField/GameField';
 
 function App() {
   const [gameField, setGameField] = React.useState([]);
   const [allCells, setAllCells] = React.useState([]);
   const [button, setButton] = React.useState('🙂');
-  const [newGame, setNewGame] = React.useState(false);
+  const [newGame, setNewGame] = React.useState(true);
   const [isTimer, setIsTimer] = React.useState(false);
   const [bombsNumber, setBombsNumber] = React.useState(0);
   const [safeCells, setSafeCells] = React.useState(0);
   const [cellsClicked, setCellsClicked] = React.useState(0);
   const [isGameOver, setIsGameOver] = React.useState(false);
 
-  const removeTimer = () => {
+  const startGame = () => {
     setIsTimer(true);
     setNewGame(true);
     setSafeCells(allCells.length - bombsNumber);
 
     allCells.forEach((el) => {
-      el.removeEventListener('click', removeTimer);
+      el.removeEventListener('click', startGame);
     });
   };
 
@@ -37,7 +37,7 @@ function App() {
 
   React.useEffect(() => {
     allCells.forEach((el) => {
-      el.addEventListener('click', removeTimer);
+      el.addEventListener('click', startGame);
     });
   }, [allCells]);
 
@@ -87,6 +87,7 @@ function App() {
     setIsTimer(false);
     setButton('🙂');
     setIsGameOver(false);
+    setCellsClicked(0);
   };
 
   return (
@@ -116,6 +117,7 @@ function App() {
             setButton('🙂');
           }}
           isGameOver={isGameOver}
+          newGame={newGame}
         />
       </section>
     </main>
