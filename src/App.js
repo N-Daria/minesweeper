@@ -64,6 +64,7 @@ function App() {
     if (openCells > safeCells) {
       setButton('😎');
       setIsGameOver(true);
+      setIsTimer(false);
     }
   };
 
@@ -111,7 +112,7 @@ function App() {
             {button}
           </button>
 
-          {isTimer ? <Timer /> : <p className="game__timer">0000</p>}
+          <Timer isTimer={isTimer} />
         </article>
 
         <GameField

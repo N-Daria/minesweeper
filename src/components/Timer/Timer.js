@@ -1,27 +1,32 @@
 import React from 'react';
 
-export default function Timer() {
-  const [timer, setSeconds] = React.useState(0);
+export default function Timer({ isTimer }) {
+  const [seconds, setSeconds] = React.useState(0);
+  let timerId;
+  const [lastTimeValue, setLastTimeValue] = React.useState(0);
 
-  if (timer > 2400) {
+  if (seconds > 2400) {
     alert('Время вышло!');
   }
 
-  React.useEffect(() => {
-    const timerId = setInterval(() => {
-      setSeconds(timer + 1);
+  const updateTime = () => {
+    timerId = setInterval(() => {
+      setSeconds(seconds + 1);
+      setLastTimeValue(seconds + 1);
     }, 1000);
-    return () => {
-      clearInterval(timerId);
-    };
+  };
+
+  // eslint-disable-next-line consistent-return
+  React.useEffect(() => {
+    if (!isTimer) {
+      setSeconds(0);
+    } else {
+      updateTime();
+      return () => {
+        clearInterval(timerId);
+      };
+    }
   });
 
-  return (
-    <p className="game__timer">
-      {
-        // eslint-disable-next-line no-nested-ternary
-        timer < 10 ? `000${timer}` : timer < 100 ? `00${timer}` : timer < 1000 ? `0${timer}` : timer
-      }
-    </p>
-  );
+  return <p className="game__timer">{lastTimeValue}</p>;
 }
