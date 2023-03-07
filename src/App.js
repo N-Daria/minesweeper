@@ -11,7 +11,7 @@ function App() {
   const [gameField, setGameField] = React.useState([]);
   const [allCells, setAllCells] = React.useState([]);
   const [button, setButton] = React.useState('🙂');
-  const [newGame, setNewGame] = React.useState(true);
+  const [isStylesReset, setIsStylesReset] = React.useState(false);
   const [isTimer, setIsTimer] = React.useState(false);
   const [bombsNumber, setBombsNumber] = React.useState(0);
   const [safeCells, setSafeCells] = React.useState(0);
@@ -20,8 +20,8 @@ function App() {
 
   const startGame = (event) => {
     setIsTimer(true);
-    setNewGame(true);
     setSafeCells(allCells.length - bombsNumber);
+    setIsStylesReset(false);
     createBombsArr(gameField, event);
 
     allCells.forEach((el) => {
@@ -32,7 +32,7 @@ function App() {
   React.useEffect(() => {
     setGameField(getInitialGameField().gameField);
     setBombsNumber(getInitialGameField().bombsNumber);
-  }, [newGame]);
+  }, []);
 
   React.useEffect(() => {
     setAllCells(Array.from(document.querySelectorAll('.cell')));
@@ -61,7 +61,7 @@ function App() {
   };
 
   const winCheck = (openCells) => {
-    if (openCells >= safeCells) {
+    if (openCells > safeCells) {
       setButton('😎');
       setIsGameOver(true);
     }
@@ -69,7 +69,7 @@ function App() {
 
   const cellClick = (cell, index, value) => {
     const openCells = cellsClicked + 1;
-    setCellsClicked(openCells);
+    setCellsClicked(cellsClicked + 1);
 
     winCheck(openCells);
     if (value === '' && cell.id === `${index.i}_${index.j}`) {
@@ -86,11 +86,15 @@ function App() {
   };
 
   const resetGame = () => {
-    setNewGame(false);
+    setIsStylesReset(true);
     setIsTimer(false);
     setButton('🙂');
     setIsGameOver(false);
     setCellsClicked(0);
+    setAllCells([]);
+    setSafeCells(0);
+    setGameField(getInitialGameField().gameField);
+    setBombsNumber(getInitialGameField().bombsNumber);
   };
 
   return (
@@ -120,7 +124,7 @@ function App() {
             setButton('🙂');
           }}
           isGameOver={isGameOver}
-          newGame={newGame}
+          isStylesReset={isStylesReset}
         />
       </section>
     </main>

@@ -2,7 +2,7 @@ import './Cell.css';
 import React from 'react';
 
 export default React.memo(
-  ({ value, newGame, cellClick, onMouseDown, onMouseUp, index, id, isGameOver }) => {
+  ({ value, isStylesReset, cellClick, onMouseDown, onMouseUp, index, id, isGameOver }) => {
     const [isBlocked, setIsBlocked] = React.useState(false);
     const element = document.getElementById(id);
 
@@ -19,7 +19,7 @@ export default React.memo(
       addStyle(element, 'cell__button');
     };
 
-    if (!newGame && element) {
+    if (isStylesReset && element) {
       resetCellsStyles();
     }
 

@@ -3,7 +3,7 @@ import Cell from '../Cell/Cell';
 import './GameField.css';
 
 const GameField = React.memo(
-  ({ gameField, newGame, cellClick, onMouseDown, onMouseUp, isGameOver }) => {
+  ({ gameField, isStylesReset, cellClick, onMouseDown, onMouseUp, isGameOver }) => {
     return (
       <table className="game-field__table">
         <tbody className="game-field__list">
@@ -23,7 +23,7 @@ const GameField = React.memo(
                       onMouseUp={onMouseUp}
                       id={`${i}_${j}`}
                       isGameOver={isGameOver}
-                      newGame={newGame}
+                      isStylesReset={isStylesReset}
                     />
                   );
                 })}
