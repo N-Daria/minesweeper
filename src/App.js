@@ -125,6 +125,8 @@ function App() {
           }}
           isGameOver={isGameOver}
           isStylesReset={isStylesReset}
+          setBombsNumber={setBombsNumber}
+          bombsNumber={bombsNumber}
         />
       </section>
     </main>

@@ -2,7 +2,18 @@ import './Cell.css';
 import React from 'react';
 
 export default React.memo(
-  ({ value, isStylesReset, cellClick, onMouseDown, onMouseUp, index, id, isGameOver }) => {
+  ({
+    value,
+    isStylesReset,
+    cellClick,
+    setBombsNumber,
+    onMouseDown,
+    onMouseUp,
+    index,
+    id,
+    isGameOver,
+    bombsNumber,
+  }) => {
     const [isBlocked, setIsBlocked] = React.useState(false);
     const element = document.getElementById(id);
 
@@ -55,13 +66,16 @@ export default React.memo(
         setIsBlocked(true);
         event.target.disabled = true;
         event.target.textContent = '🚩';
+        setBombsNumber(bombsNumber - 1);
       } else if (event.target.textContent === '🚩') {
         event.target.disabled = true;
         setIsBlocked(true);
         event.target.textContent = '❓';
+        setBombsNumber(bombsNumber + 1);
       } else if (event.target.textContent === '❓') {
         event.target.textContent = '';
         event.target.disabled = false;
+        setIsBlocked(false);
       }
     };
 
