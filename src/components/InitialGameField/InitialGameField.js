@@ -24,16 +24,15 @@ const createAdjacentCell = (x, y, gameField) => {
 };
 
 export const createBombsArr = (gameField, cell) => {
-  for (let i = 0; i <= bombsNumber; i++) {
+  for (let i = 0; i < bombsNumber; i++) {
     const x = Math.floor(Math.random() * rows);
     const y = Math.floor(Math.random() * columns);
 
-    if (gameField[x][y] === cell) {
-      i -= 1;
-      return i;
-    }
+    console.log(bombsNumber);
 
-    if (!gameField[x][y]) {
+    if (`${x}_${y}` === cell.target.id || gameField[x][y] !== '') {
+      i -= 1;
+    } else {
       gameField[x][y] = '*';
       createAdjacentCell(x, y, gameField);
     }

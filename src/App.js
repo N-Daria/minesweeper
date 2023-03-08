@@ -61,7 +61,7 @@ function App() {
   };
 
   const winCheck = (openCells) => {
-    if (openCells > safeCells) {
+    if (openCells >= safeCells) {
       setButton('😎');
       setIsGameOver(true);
       setIsTimer(false);
