@@ -13,6 +13,7 @@ function App() {
   const [button, setButton] = React.useState('🙂');
   const [isStylesReset, setIsStylesReset] = React.useState(false);
   const [isTimer, setIsTimer] = React.useState(false);
+  const [resetedTimer, setResetedTimer] = React.useState(false);
   const [bombsNumber, setBombsNumber] = React.useState(0);
   const [safeCells, setSafeCells] = React.useState(0);
   const [cellsClicked, setCellsClicked] = React.useState(0);
@@ -96,13 +97,16 @@ function App() {
     setSafeCells(0);
     setGameField(getInitialGameField().gameField);
     setBombsNumber(getInitialGameField().bombsNumber);
+    setResetedTimer(true);
   };
 
   return (
     <main className="body">
       <section className="game">
         <article className="game__info">
-          <p className="game__bombsNumber">{`0${bombsNumber}`}</p>
+          <div className="game__box ">
+            <p className="game__bombsNumber">{`0${bombsNumber}`}</p>
+          </div>
           <button
             className="game__button"
             aria-label="reset the field"
@@ -111,8 +115,9 @@ function App() {
           >
             {button}
           </button>
-
-          <Timer isTimer={isTimer} />
+          <div className="game__box">
+            <Timer isTimer={isTimer} resetedTimer={resetedTimer} />
+          </div>
         </article>
 
         <GameField

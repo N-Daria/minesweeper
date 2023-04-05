@@ -1,32 +1,35 @@
 import React from 'react';
+import { configuration } from '../../utils/utils';
 
-export default function Timer({ isTimer }) {
-  const [seconds, setSeconds] = React.useState(0);
-  let timerId;
-  const [lastTimeValue, setLastTimeValue] = React.useState(0);
+export default function Timer({ isTimer, resetedTimer }) {
+  const [elapsedTime, setElapsedTime] = React.useState(0);
+  const [timerId, setTimerId] = React.useState(null);
 
-  if (seconds > 2400) {
-    alert('Время вышло!');
-  }
+  React.useEffect(() => {
+    if (elapsedTime > configuration.gameTime) {
+      alert('Время вышло!');
+    }
+  }, [elapsedTime]);
 
-  const updateTime = () => {
-    timerId = setInterval(() => {
-      setSeconds(seconds + 1);
-      setLastTimeValue(seconds + 1);
-    }, 1000);
-  };
-
-  // eslint-disable-next-line consistent-return
   React.useEffect(() => {
     if (!isTimer) {
-      setSeconds(0);
+      clearInterval(timerId);
     } else {
-      updateTime();
-      return () => {
-        clearInterval(timerId);
-      };
-    }
-  });
+      const gameStartTime = Date.now();
 
-  return <p className="game__timer">{lastTimeValue}</p>;
+      const timerFunction = setInterval(() => {
+        const timePassed = Date.now() - gameStartTime + elapsedTime;
+        const currentSeconds = parseInt(timePassed / 1000, 10);
+        setElapsedTime(currentSeconds);
+      }, 1000);
+
+      setTimerId(timerFunction);
+    }
+  }, [isTimer]);
+
+  React.useEffect(() => {
+    setElapsedTime(0);
+  }, [resetedTimer]);
+
+  return <p className="timer">{elapsedTime}</p>;
 }
