@@ -1,0 +1,32 @@
+.number-box {
+  color: rgba(255, 0, 0, 0.3);
+  background-color: black;
+  width: 49px;
+}
+
+.number-box::before {
+  content: '0000';
+  z-index: 2;
+  position: absolute;
+  line-height: 26px;
+  font-size: 26px;
+  margin: 0;
+  font-family: 'digital-7', sans-serif;
+}
+
+.number-box__text {
+  display: inline-block;
+  color: red;
+  line-height: 26px;
+  font-size: 26px;
+  margin: 0;
+  font-family: 'digital-7', sans-serif;
+  z-index: 2;
+  width: 100%;
+  text-align: end;
+}
+
+.number-box__char {
+  display: inline-block;
+  width: 25%;
+}

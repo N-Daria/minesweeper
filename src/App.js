@@ -6,6 +6,7 @@ import {
 } from './components/InitialGameField/InitialGameField';
 import Timer from './components/Timer/Timer';
 import GameField from './components/GameField/GameField';
+import NumberBox from './components/NumberBox/NumberBox';
 
 function App() {
   const [gameField, setGameField] = React.useState([]);
@@ -104,9 +105,7 @@ function App() {
     <main className="body">
       <section className="game">
         <article className="game__info">
-          <div className="game__box ">
-            <p className="game__bombsNumber">{`0${bombsNumber}`}</p>
-          </div>
+          <NumberBox number={bombsNumber} />
           <button
             className="game__button"
             aria-label="reset the field"
@@ -115,9 +114,7 @@ function App() {
           >
             {button}
           </button>
-          <div className="game__box">
-            <Timer isTimer={isTimer} resetedTimer={resetedTimer} />
-          </div>
+          <Timer isTimer={isTimer} resetedTimer={resetedTimer} />
         </article>
 
         <GameField

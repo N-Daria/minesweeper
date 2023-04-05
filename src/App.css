@@ -42,14 +42,3 @@
   border-left-color: #808080;
   border-top-color: #808080;
 }
-
-.game__timer,
-.game__bombsNumber {
-  display: inline-block;
-  background-color: black;
-  color: red;
-  line-height: 26px;
-  font-size: 26px;
-  margin: 0;
-  font-family: 'digital-7', sans-serif;
-}

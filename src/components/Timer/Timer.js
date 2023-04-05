@@ -1,5 +1,6 @@
 import React from 'react';
 import { configuration } from '../../utils/utils';
+import NumberBox from '../NumberBox/NumberBox';
 
 export default function Timer({ isTimer, resetedTimer }) {
   const [elapsedTime, setElapsedTime] = React.useState(0);
@@ -31,5 +32,5 @@ export default function Timer({ isTimer, resetedTimer }) {
     setElapsedTime(0);
   }, [resetedTimer]);
 
-  return <p className="timer">{elapsedTime}</p>;
+  return <NumberBox number={elapsedTime} />;
 }
