@@ -28,8 +28,6 @@ export const createBombsArr = (gameField, cell) => {
     const x = Math.floor(Math.random() * rows);
     const y = Math.floor(Math.random() * columns);
 
-    console.log(bombsNumber);
-
     if (`${x}_${y}` === cell.target.id || gameField[x][y] !== '') {
       i -= 1;
     } else {
