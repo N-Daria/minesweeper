@@ -25,6 +25,7 @@ function App() {
     setSafeCells(allCells.length - bombsNumber);
     setIsStylesReset(false);
     createBombsArr(gameField, event);
+    setResetedTimer(false);
 
     allCells.forEach((el) => {
       el.removeEventListener('click', startGame);
